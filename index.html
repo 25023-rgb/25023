@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS Variables & Reset --- */
+        :root {
+            --primary: #0066cc;       /* 知的な青 */
+            --primary-dark: #004c99;
+            --accent: #4db8ff;        /* 明るいアクセント */
+            --bg-light: #f5f9fc;      /* 非常に薄い青灰色 */
+            --text-main: #333333;
+            --text-sub: #666666;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 50, 100, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Utilities --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- Header --- */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            /* Decorative Circle */
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .profile-icon {
+            font-size: 4rem;
+            background: rgba(255,255,255,0.2);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 4px solid rgba(255,255,255,0.3);
+        }
+
+        /* --- Profile Section --- */
+        .profile-section {
+            background: var(--white);
+            padding: 60px 0;
+            margin-top: -40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 10;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .profile-item h3 {
+            font-size: 1rem;
+            color: var(--text-sub);
+            margin-bottom: 5px;
+        }
+
+        .profile-item p {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        /* --- Gakuchika Section --- */
+        .gakuchika-section {
+            padding: 80px 0;
+        }
+
+        .gakuchika-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .gakuchika-header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .gakuchika-header i {
+            font-size: 1.5rem;
+        }
+
+        .gakuchika-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .gakuchika-body {
+            padding: 40px;
+        }
+
+        /* Timeline style for Gakuchika */
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 30px;
+            border-left: 3px solid #eee;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+            border-left: 3px solid transparent;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid var(--white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .timeline-text {
+            text-align: justify;
+        }
+
+        .highlight {
+            background: linear-gradient(transparent 70%, #b3e0ff 70%);
+            font-weight: 700;
+            padding: 0 2px;
+        }
+
+        .result-box {
+            background: #f0f7ff;
+            border: 2px solid #cceeff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .result-number {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--text-main);
+            color: var(--white);
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .gakuchika-body {
+                padding: 20px;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo">
+                <i class="fas fa-code"></i> My Portfolio
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="profile-icon">
+                <i class="fas fa-user"></i>
+            </div>
+            <h1>Information Engineering Student</h1>
+            <p>論理的思考と情熱で、ユーザーの課題を解決する。</p>
+        </div>
+    </section>
+
+    <!-- Profile Detail (Overlapping Hero) -->
+    <div class="container">
+        <div class="profile-section">
+            <div class="profile-grid">
+                <div class="profile-item">
+                    <h3>Name</h3>
+                    <p>情報 太郎 <br><span style="font-size:0.8rem; font-weight:normal; color:#999;">(Taro Joho)</span></p>
+                </div>
+                <div class="profile-item">
+                    <h3>Affiliation</h3>
+                    <p>〇〇大学 <br><span style="font-size:0.8rem; font-weight:normal; color:#999;">情報工学部 1年</span></p>
+                </div>
+                <div class="profile-item">
+                    <h3>Role</h3>
+                    <p>AI Engineer / Web Developer<br><span style="font-size:0.8rem; font-weight:normal; color:#999;">(Aspiring)</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gakuchika Section -->
+    <section class="gakuchika-section">
+        <div class="container">
+            <h2 class="section-title">Student Projects</h2>
+            
+            <div class="gakuchika-card">
+                <div class="gakuchika-header">
+                    <i class="fas fa-bullhorn"></i>
+                    <h3>学生時代に力を入れたこと：落語研究部での改革</h3>
+                </div>
+                <div class="gakuchika-body">
+                    
+                    <!-- Situation & Task -->
+                    <div class="timeline-item">
+                        <div class="timeline-title">
+                            <i class="fas fa-exclamation-circle"></i> 課題と背景
+                        </div>
+                        <p class="timeline-text">
+                            落語研究部の演者兼リーダーとして、文化祭公演の成功に尽力しました。当初は落語特有の言い回しや背景知識が伝わらず、練習での反応が鈍い点が課題でした。危機感を抱き、誰にでも直感的に面白いと思ってもらえるよう改革を決意しました。
+                        </p>
+                    </div>
+
+                    <!-- Action -->
+                    <div class="timeline-item">
+                        <div class="timeline-title">
+                            <i class="fas fa-tools"></i> 施策と行動
+                        </div>
+                        <p class="timeline-text">
+                            そこで部員全員を巻き込み、1ヶ月間毎日2時間の会議と練習を主導。脚本に若者言葉や高校生あるあるを盛り込み距離を縮めると共に、互いの演技を動画分析し身振り手振りを大げさにするなど視覚的な改善も徹底しました。
+                        </p>
+                    </div>
+
+                    <!-- Result -->
+                    <div class="timeline-item">
+                        <div class="timeline-title">
+                            <i class="fas fa-trophy"></i> 結果と学び
+                        </div>
+                        <p class="timeline-text">
+                            結果、当日は満席となり<span class="highlight">来場者約80名の9割から最高評価</span>を得ました。この経験から、相手の視点に立って課題を解決する力と、チームで妥協なく質を高める執念を学びました。
+                        </p>
+                        
+                        <div class="result-box">
+                            <div><i class="fas fa-users"></i> 来場者 <span class="result-number">80名</span> (満席)</div>
+                            <div><i class="fas fa-star"></i> 満足度 <span class="result-number">90%</span> (最高評価)</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 My Portfolio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
