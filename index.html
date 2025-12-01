@@ -267,7 +267,7 @@
             margin-bottom: 80px; 
         }
 
-        /* 名前用のタイプライターエフェクト（変更点） */
+        /* 名前用のタイプライターエフェクト（変更点：カーソル点滅を有限回数に） */
         .name-typewriter {
             font-family: var(--font-display);
             font-size: 4rem;
@@ -285,8 +285,8 @@
             border-right: 3px solid var(--primary); /* カーソル */
             width: 0; /* 最初は幅0 */
             
-            /* 1.5秒かけて入力 */
-            animation: typing-name 1.5s steps(8, end) forwards, blink-caret 0.75s step-end infinite;
+            /* 1.5秒かけて入力。点滅は2回(1.5s)で終了して消える */
+            animation: typing-name 1.5s steps(8, end) forwards, blink-caret 0.75s step-end 2 forwards;
         }
 
         .name-link:hover .name-typewriter {
@@ -314,7 +314,7 @@
             opacity: 1;
         }
 
-        /* 所属用のタイプライターエフェクト（変更点） */
+        /* 所属用のタイプライターエフェクト（変更点：カーソル点滅を有限回数に） */
         .affiliation-typewriter {
             font-family: var(--font-code);
             font-size: 1.2rem;
@@ -327,7 +327,8 @@
             opacity: 0; /* 最初は隠しておく */
             
             /* 名前の入力が終わった後（1.8秒後）に開始 */
-            animation: typing-affiliation 2s steps(20, end) forwards, blink-caret 0.75s step-end infinite;
+            /* 入力時間2s。点滅は3回(2.25s)行って消える */
+            animation: typing-affiliation 2s steps(20, end) forwards, blink-caret 0.75s step-end 3 forwards;
             animation-delay: 1.8s;
         }
 
