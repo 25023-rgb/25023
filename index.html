@@ -264,11 +264,11 @@
             display: inline-block;
             transition: 0.3s;
             position: relative;
-            /* 下のテキストと被らないように余白を広げる */
-            margin-bottom: 40px; 
+            margin-bottom: 80px; 
         }
 
-        .glitch-text {
+        /* 名前用のタイプライターエフェクト（変更点） */
+        .name-typewriter {
             font-family: var(--font-display);
             font-size: 4rem;
             font-weight: 700;
@@ -278,10 +278,18 @@
             text-shadow: 3px 3px var(--secondary), -3px -3px var(--primary);
             cursor: pointer;
             position: relative;
+            
             display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid var(--primary); /* カーソル */
+            width: 0; /* 最初は幅0 */
+            
+            /* 1.5秒かけて入力 */
+            animation: typing-name 1.5s steps(8, end) forwards, blink-caret 0.75s step-end infinite;
         }
 
-        .name-link:hover .glitch-text {
+        .name-link:hover .name-typewriter {
             color: var(--primary);
             text-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary);
             transform: scale(1.05);
@@ -291,7 +299,7 @@
         .name-link::after {
             content: ">> ACCESS_CATS_DATABASE <<";
             position: absolute;
-            bottom: -30px; 
+            bottom: -50px; 
             left: 50%;
             transform: translateX(-50%);
             color: var(--primary);
@@ -306,7 +314,8 @@
             opacity: 1;
         }
 
-        .typewriter {
+        /* 所属用のタイプライターエフェクト（変更点） */
+        .affiliation-typewriter {
             font-family: var(--font-code);
             font-size: 1.2rem;
             color: var(--primary);
@@ -315,8 +324,11 @@
             white-space: nowrap;
             border-right: 3px solid var(--primary);
             width: 0;
-            animation: typing 3.5s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
-            max-width: 100%;
+            opacity: 0; /* 最初は隠しておく */
+            
+            /* 名前の入力が終わった後（1.8秒後）に開始 */
+            animation: typing-affiliation 2s steps(20, end) forwards, blink-caret 0.75s step-end infinite;
+            animation-delay: 1.8s;
         }
 
         /* --- Section Styling --- */
@@ -479,9 +491,16 @@
         }
 
         /* --- Animations --- */
-        @keyframes typing {
+        /* 名前の入力アニメーション */
+        @keyframes typing-name {
             from { width: 0 }
             to { width: 100% }
+        }
+        
+        /* 所属の入力アニメーション（opacityも変化させる） */
+        @keyframes typing-affiliation {
+            from { width: 0; opacity: 1; }
+            to { width: 100%; opacity: 1; }
         }
 
         @keyframes blink-caret {
@@ -503,8 +522,8 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .glitch-text { font-size: 2.5rem; }
-            .typewriter { font-size: 0.9rem; }
+            .name-typewriter { font-size: 2.5rem; }
+            .affiliation-typewriter { font-size: 0.9rem; }
             .profile-data { grid-template-columns: 1fr; }
             .header-inner { flex-direction: column; gap: 10px; }
             .data-list li { flex-direction: column; }
@@ -573,11 +592,13 @@
             <div class="terminal-window">
                 <!-- ここがリンクになっています：猫の検索結果へ -->
                 <a href="https://www.google.com/search?q=%E7%8C%AB+%E3%83%95%E3%83%AA%E3%83%BC%E7%B4%A0%E6%9D%90&tbm=isch" target="_blank" class="name-link">
-                    <h1 class="glitch-text">近江 琥羽</h1>
+                    <!-- 名前部分のクラスを変更 -->
+                    <h1 class="name-typewriter">近江 琥羽</h1>
                 </a>
                 
                 <div style="width: 100%; text-align: center;">
-                    <span class="typewriter">> 所属: 理工学部 応用情報工学科_</span>
+                    <!-- 所属部分のクラスを変更 -->
+                    <span class="affiliation-typewriter">> 所属: 理工学部 応用情報工学科_</span>
                 </div>
             </div>
         </section>
