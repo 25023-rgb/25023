@@ -17,10 +17,7 @@
             --primary: #00e5ff;       /* Cyber Cyan */
             --secondary: #ff00ff;     /* Neon Magenta */
             
-            /* 【修正箇所】透明度を調整して背景を見やすくしました */
-            /* 0.9(濃い) -> 0.4(薄い) */
             --bg-overlay: rgba(5, 15, 30, 0.4); 
-            /* 0.8(濃い) -> 0.6(やや透ける) */
             --glass-panel: rgba(10, 25, 50, 0.6);
             
             --border-glow: 0 0 8px rgba(0, 229, 255, 0.6);
@@ -47,14 +44,15 @@
             color: #fff;
             line-height: 1.8;
             background-color: #000;
+            
             /* 背景画像 (猫) */
             background-image: url('https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             overflow: hidden; /* 年齢確認中はスクロール禁止 */
             
-            /* 背景が明るくなった分、文字に影をつけて読みやすくする */
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
@@ -102,7 +100,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #000; /* ここは完全な黒で隠す */
+            background-color: #000;
             z-index: 100000;
             display: flex;
             justify-content: center;
@@ -193,7 +191,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.8); /* ヘッダーも少し薄く */
+            background: rgba(0, 0, 0, 0.8);
             border-bottom: 1px solid var(--primary);
             box-shadow: 0 0 15px rgba(0, 229, 255, 0.1);
             padding: 15px 0;
@@ -251,7 +249,7 @@
         }
 
         .terminal-window {
-            background: var(--glass-panel); /* ここも薄くした変数を使用 */
+            background: var(--glass-panel);
             border: 1px solid var(--primary);
             padding: 50px;
             border-radius: 8px;
@@ -266,6 +264,8 @@
             display: inline-block;
             transition: 0.3s;
             position: relative;
+            /* 下のテキストと被らないように余白を広げる */
+            margin-bottom: 40px; 
         }
 
         .glitch-text {
@@ -273,7 +273,7 @@
             font-size: 4rem;
             font-weight: 700;
             color: #fff;
-            margin-bottom: 20px;
+            margin-bottom: 0; 
             letter-spacing: 0.1em;
             text-shadow: 3px 3px var(--secondary), -3px -3px var(--primary);
             cursor: pointer;
@@ -287,10 +287,11 @@
             transform: scale(1.05);
         }
         
+        /* ホバー時のテキスト */
         .name-link::after {
             content: ">> ACCESS_CATS_DATABASE <<";
             position: absolute;
-            bottom: -10px;
+            bottom: -30px; 
             left: 50%;
             transform: translateX(-50%);
             color: var(--primary);
@@ -303,7 +304,6 @@
 
         .name-link:hover::after {
             opacity: 1;
-            bottom: -25px;
         }
 
         .typewriter {
@@ -329,7 +329,7 @@
             align-items: center;
             gap: 15px;
             margin-bottom: 40px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* 線も見やすく */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
             padding-bottom: 10px;
         }
 
@@ -442,7 +442,7 @@
         .module {
             border: 1px solid rgba(255, 255, 255, 0.3);
             padding: 20px;
-            background: rgba(255, 255, 255, 0.05); /* 少し明るく */
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 4px;
         }
 
@@ -538,7 +538,7 @@
                     YES<br><span style="font-size:0.7rem;">[ENTER]</span>
                 </button>
                 
-                <!-- NO: 猫画像へ飛ばされる -->
+                <!-- NO: 猫画像検索へ飛ばされる -->
                 <button id="btn-no" class="sys-btn btn-deny">
                     NO<br><span style="font-size:0.7rem;">[EXIT]</span>
                 </button>
@@ -601,6 +601,8 @@
                         <li><span class="label">所属</span> 理工学部 応用情報工学科</li>
                         <li><span class="label">役割</span> 学生 / エンジニア志望</li>
                         <li><span class="label">スキル</span> Python, HTML/CSS, 課題解決</li>
+                        <!-- 追加した項目 -->
+                        <li><span class="label">好きな物</span> ねこ</li>
                     </ul>
                     <p style="margin-top: 20px; line-height: 1.8;">
                         情報工学の領域を探求する学生エンジニア。論理的アプローチとクリエイティブな発想で、システム開発からAI技術まで幅広く学習中。
@@ -676,7 +678,7 @@
                 }, 500);
             });
 
-            // NO: 新しいタブで猫画像ページを開く（修正箇所）
+            // NO: 新しいタブで「猫 フリー素材」検索ページを開く
             btnNo.addEventListener('click', () => {
                 window.open("https://www.google.com/search?q=%E7%8C%AB+%E3%83%95%E3%83%AA%E3%83%BC%E7%B4%A0%E6%9D%90&tbm=isch", "_blank");
             });
